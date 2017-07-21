@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -32,9 +36,12 @@ public class OsTopLayout extends ScrollView {
     private TextView mTvMsg;
     private String normal_msg = "上拉查看更多";
     private String alter_msg = "释放查看更多";
+    private boolean isRotated = false;
 
     private boolean canLoadMore = false;//是否需要切换页面
     private OverScrollObservable mOverScrollObservable;
+    private ImageView mImageArrowUp;
+    private ObjectAnimator mRotate, mRotateUp;
 
 
     public OsTopLayout(Context context) {
@@ -44,13 +51,14 @@ public class OsTopLayout extends ScrollView {
     public OsTopLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
+        loadAnim();
     }
 
     public int getChildCounts() {
         return contentview.getChildCount();
     }
 
-    public ViewGroup getContentview() {
+    public ViewGroup getContentView() {
         return contentview;
     }
 
@@ -75,8 +83,19 @@ public class OsTopLayout extends ScrollView {
 
     private void initView() {
         mFooterView = inflate(getContext(), R.layout.bottom_footer_layout, null);
+        mImageArrowUp = (ImageView) mFooterView.findViewById(R.id.image_arrow_up);
         mTvMsg = (TextView) mFooterView.findViewById(R.id.text_msg);
         mOverScrollObservable = new OverScrollObservable();
+    }
+
+    private void loadAnim() {
+        mRotate = ObjectAnimator.ofFloat(mImageArrowUp, "rotation", 0, -180);
+        mRotate.setDuration(300);
+        mRotate.setInterpolator(new DecelerateInterpolator());
+
+        mRotateUp = ObjectAnimator.ofFloat(mImageArrowUp, "rotation", -180, 0);
+        mRotateUp.setDuration(300);
+        mRotateUp.setInterpolator(new DecelerateInterpolator());
     }
 
     @Override
@@ -136,9 +155,19 @@ public class OsTopLayout extends ScrollView {
                     if (offsetY + footerHeight < 0) {
                         canLoadMore = true;
                         mTvMsg.setText(alter_msg);
+                        if (!isRotated) {
+                            //执行动画
+                            mRotate.start();
+                            isRotated = true;
+                        }
                     } else {
                         canLoadMore = false;
                         mTvMsg.setText(normal_msg);
+                        if (isRotated) {
+                            //执行动画
+                            mRotateUp.start();
+                            isRotated = false;
+                        }
                     }
                     return true;
                 }
@@ -170,6 +199,8 @@ public class OsTopLayout extends ScrollView {
         ObjectAnimator translationY = ObjectAnimator.ofFloat(contentview, "translationY", contentview.getTranslationY(), 0);
         translationY.setDuration(400);
         translationY.start();
+        if (isRotated)
+            mRotateUp.start();
         isMove = false;
         isAtTop = false;
         isAtBottom = false;

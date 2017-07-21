@@ -14,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         OsContainer container = (OsContainer) findViewById(R.id.container);
-        container.setChildView(new OsTopLayout(this, R.layout.top_layout), new OsBottomLayout(this, R.layout.bottom_layout));
+        container.setChildView(new OsTopLayout(this, R.layout.top_layout),
+                new OsBottomLayout(this, R.layout.bottom_layout));
     }
 }

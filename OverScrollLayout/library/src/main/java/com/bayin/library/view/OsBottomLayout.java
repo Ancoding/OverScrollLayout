@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -30,11 +32,14 @@ public class OsBottomLayout extends ScrollView{
     private float mStartY;
     private int footerHeight;
     private TextView mTvMsg;
-    private String normal_msg = "下拉查看详情";
-    private String alter_msg = "释放查看详情";
+    private String normal_msg = "下拉查看更多";
+    private String alter_msg = "释放查看更多";
 
     private boolean canLoadMore = false;//是否需要切换页面
     private OverScrollObservable mOverScrollObservable;
+    private ImageView mImageArrowDown;
+    private ObjectAnimator mRotate, mRotateUp;
+    protected boolean isRotated = false;
 
 
     public OsBottomLayout(Context context) {
@@ -44,6 +49,7 @@ public class OsBottomLayout extends ScrollView{
     public OsBottomLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initView();
+        loadAnim();
     }
 
     /**
@@ -75,9 +81,20 @@ public class OsBottomLayout extends ScrollView{
     }
 
     private void initView() {
-        mHeaderView = inflate(getContext(), R.layout.bottom_footer_layout, null);
+        mHeaderView = inflate(getContext(), R.layout.top_header_layout, null);
+        mImageArrowDown = (ImageView) mHeaderView.findViewById(R.id.image_arrow_down);
         mTvMsg = (TextView) mHeaderView.findViewById(R.id.text_msg);
         mOverScrollObservable = new OverScrollObservable();
+    }
+
+    private void loadAnim() {
+        mRotate = ObjectAnimator.ofFloat(mImageArrowDown, "rotation", 180, 0);
+        mRotate.setDuration(300);
+        mRotate.setInterpolator(new DecelerateInterpolator());
+
+        mRotateUp = ObjectAnimator.ofFloat(mImageArrowDown, "rotation", 0, 180);
+        mRotateUp.setDuration(300);
+        mRotateUp.setInterpolator(new DecelerateInterpolator());
     }
 
     @Override
@@ -138,9 +155,17 @@ public class OsBottomLayout extends ScrollView{
                     if (offsetY - footerHeight > 0) {
                         canLoadMore = true;
                         mTvMsg.setText(alter_msg);
+                        if (!isRotated){
+                            mRotateUp.start();
+                            isRotated = true;
+                        }
                     } else {
                         canLoadMore = false;
                         mTvMsg.setText(normal_msg);
+                        if (isRotated){
+                            mRotate.start();
+                            isRotated = false;
+                        }
                     }
                     return true;
                 }
@@ -172,6 +197,9 @@ public class OsBottomLayout extends ScrollView{
         ObjectAnimator translationY = ObjectAnimator.ofFloat(contentview, "translationY", contentview.getTranslationY(), 0);
         translationY.setDuration(400);
         translationY.start();
+        if (isRotated){
+            mRotate.start();
+        }
         isMove = false;
         isAtTop = false;
         isAtBottom = false;

@@ -113,7 +113,7 @@ public class OsContainer extends FrameLayout implements Observer {
 
     private void startResetAnimation() {
         ObjectAnimator dismissBottomAnim = ObjectAnimator.ofFloat(mBottomView, "alpha", 1f, 0f).setDuration(ANIM_UNIT);
-        ObjectAnimator slideInTopAnim = ObjectAnimator.ofFloat(mTopView.getContentview(), "translationY", -mWindowHeight, 0).setDuration(ANIM_UNIT);
+        ObjectAnimator slideInTopAnim = ObjectAnimator.ofFloat(mTopView.getContentView(), "translationY", -mWindowHeight, 0).setDuration(ANIM_UNIT);
         slideInTopAnim.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
