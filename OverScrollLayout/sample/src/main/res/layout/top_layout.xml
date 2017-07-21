@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/primary"
+        android:paddingLeft="50dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:text="First preview"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="3dp"
+            android:textSize="14sp"
+            android:textColor="@color/primary_light"
+            android:text="Much information below"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/primary_text"
+            android:text="Daily Material Design Showcase"
+            />
+        <TextView
+            style="@style/secondary_text"
+            android:paddingTop="4dp"
+            android:text="Visit MaterialUp"/>
+    </LinearLayout>
+    <View style="@style/divide_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/primary_text"
+            android:text="Daily Material Design Showcase"
+            />
+        <TextView
+            style="@style/secondary_text"
+            android:paddingTop="4dp"
+            android:text="Visit MaterialUp"/>
+    </LinearLayout>
+    <View style="@style/divide_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/primary_text"
+            android:text="Daily Material Design Showcase"
+            />
+        <TextView
+            style="@style/secondary_text"
+            android:paddingTop="4dp"
+            android:text="Visit MaterialUp"/>
+    </LinearLayout>
+    <View style="@style/divide_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/primary_text"
+            android:text="Daily Material Design Showcase"
+            />
+        <TextView
+            style="@style/secondary_text"
+            android:paddingTop="4dp"
+            android:text="Visit MaterialUp"/>
+    </LinearLayout>
+    <View style="@style/divide_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/primary_text"
+            android:text="Daily Material Design Showcase"
+            />
+        <TextView
+            style="@style/secondary_text"
+            android:paddingTop="4dp"
+            android:text="Visit MaterialUp"/>
+    </LinearLayout>
+    <View style="@style/divide_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/primary_text"
+            android:text="Daily Material Design Showcase"
+            />
+        <TextView
+            style="@style/secondary_text"
+            android:paddingTop="4dp"
+            android:text="Visit MaterialUp"/>
+    </LinearLayout>
+    <View style="@style/divide_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            style="@style/primary_text"
+            android:text="Daily Material Design Showcase"
+            />
+        <TextView
+            style="@style/secondary_text"
+            android:paddingTop="4dp"
+            android:text="Visit MaterialUp"/>
+    </LinearLayout>
+    <View style="@style/divide_line"/>
+
+</LinearLayout>
